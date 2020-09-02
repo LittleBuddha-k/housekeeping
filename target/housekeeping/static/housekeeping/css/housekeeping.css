@@ -1,0 +1,101 @@
+.background-body{
+    background-image: url("/housekeeping/static/images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed
+}
+
+/*调整导航栏*/
+.navbar{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;/*设置导航栏的z优先级最高*/
+}
+
+.content-center{
+    text-align: center;
+}
+
+.index-tag-list{
+    left: 30px;
+}
+
+.index-display-list{
+    margin-top: 30px;
+}
+
+.login-table{
+    left: 32%;
+    text-align: center;
+}
+
+#login-logo{
+    width: 300px;
+    height: 200px;
+    margin-top: 37%;
+    vertical-align: middle;
+}
+
+.housekeeper{
+    margin-bottom: 10px;
+}
+
+#housekeeping-detail{
+    position: absolute;
+    top: 25%;
+    right: 0;
+}
+
+#housekeeping-production{
+    margin-top: 20px;
+}
+
+#housekeeping-name{
+    margin-top: 20px;
+}
+
+.housekeeper-picture{
+    width: 170px;
+    height: 100px;
+}
+
+.housekeeping-layout{
+    margin-top:2%;
+}
+
+.table-margin-top{
+    margin-top: 8%;
+}
+
+.operator-input-left{
+    text-align: left;
+}
+
+.operator-input-right{
+    text-align: right;
+}
+
+.operator-tool{
+    margin-bottom: 20px;
+}
+
+.dataTables_info{
+    text-align: right;
+}
+
+#search{
+    float: right;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.form-group{
+    text-align: center;
+}
+
+.submit-button-center{
+    text-align: center;
+}

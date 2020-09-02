@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="1800">
+    <appenders>
+        <Console name="consolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+    </appenders>
+
+    <loggers>
+        <!-- 将业务dao接口填写进去,并用控制台输出即可 -->
+        <logger name="com.littlebuddha.housekeeping" level="DEBUG" additivity="false">
+            <appender-ref ref="consolePrint"/>
+        </logger>
+
+        <root level="info">
+            <appender-ref ref="consolePrint" />
+        </root>
+    </loggers>
+</Configuration>
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    &lt;!&ndash;<Properties>
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level%logger{36} - %msg%n
+        </property>
+    </Properties>&ndash;&gt;
+
+    <Appenders>
+        &lt;!&ndash;这个输出控制台的配置 &ndash;&gt;
+        <Console name="Console" target="SYSTEM_OUT">
+            &lt;!&ndash; 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) &ndash;&gt;
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+    </Appenders>
+
+    &lt;!&ndash;然后定义logger，只有定义了logger并引入的appender，appender才会生效 &ndash;&gt;
+    <Loggers>
+        &lt;!&ndash; 将业务dao接口填写进去,并用控制台输出即可 &ndash;&gt;
+        <logger name="com.littlebuddha.housekeeping" level="DEBUG" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        &lt;!&ndash; 配置日志的根节点 &ndash;&gt;
+        <root level="debug">
+            <appender-ref ref="Console"/>
+        </root>
+
+    </Loggers>
+</Configuration>
+-->

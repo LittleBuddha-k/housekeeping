@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true">
+
+    <description>Spring Shiro整合配置文件</description>
+    <!--realm-->
+    <bean id="systemAuthorizationRealm" class="com.littlebuddha.housekeeping.security.SystemAuthorizationRealm"/>
+
+    <!--shiro授权缓存管理 器-->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:cache/shiro-ehcache.xml"/>
+    </bean>
+
+    <!--shiro的会话session管理器，这个是shiro自带的session管理-->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!--会话超时时间，单位：毫秒-->
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionValidationSchedulerEnabled" value="true" />
+        <property name="sessionIdCookie">
+            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                <property name="name" value="JSESSID" />
+            </bean>
+        </property>
+    </bean>
+
+    <!--自定义form认证过滤器-->
+    <!--<bean id="formAuthenticationFilter" class="com.littlebuddha.housekeeping.security.CustomFormAuthenticationFilter">
+        &lt;!&ndash;提交表单中账户的name属性名称&ndash;&gt;
+        <property name="usernameParam" value="name"/>
+        &lt;!&ndash;提交表单中密码的name属性名称&ndash;&gt;
+        <property name="passwordParam" value="password"/>
+        &lt;!&ndash;提交表单中记住我的name属性名称&ndash;&gt;
+        <property name="rememberMeParam" value="rememberMe" />
+    </bean>-->
+
+    <!--rememberMeManager管理器，写cookie，取出cookie生成用户信息-->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!--rememberMe是cookie的名字-->
+        <constructor-arg value="rememberMe" />
+        <!--记住我cookie生效时间30天-->
+        <property name="maxAge" value="2592000"/>
+    </bean>
+
+    <!--securityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="systemAuthorizationRealm"/>
+        <!--注入缓存管理器-->
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--注入session管理器-->
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--注入 rememberMe管理器-->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+    </bean>
+
+    <!--
+    使用SecurityUtils将SecurityManager设置到运行环境
+    SecurityUtils.setSecurityManager(securityManager);
+    -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+        <property name="arguments" ref="securityManager"/>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <!--开启shiro注解支持-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>-->
+    <!--开启aop对类代理，当使用shiro注解-->
+    <aop:config proxy-target-class="true"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!--web.xml中定义的shiro的filter对应的bean-->
+    <!--Shiro的  Web过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--LoginUrl认证提交地址，如果认证没有通过将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单验证-->
+        <property name="loginUrl" value="/login"></property>
+        <!--指定没有权限操作时的跳转页面-->
+        <property name="unauthorizedUrl" value="/unAuthorized"></property>
+        <!--指定认证成功后的跳转页面-->
+        <property name="successUrl" value="/index"></property>
+        <!--将自定义的formAuthenticationFilter注入shiroFilter-自定义的FormAuthenticationFilter加了一个验证码-->
+        <!--<property name="filters">
+            <map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+            </map>
+        </property>-->
+        <!--过滤器链自定义，从上往下顺序执行，一般将/**放到最下面-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--anon无需认证
+                设置静态资源-->
+                /static/** = anon
+                /webpage/views/** = anon
+                /loginPage = anon
+                /logOut = logout
+                <!--authc需要认证-->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+</beans>

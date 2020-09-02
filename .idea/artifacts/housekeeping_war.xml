@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="housekeeping:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>housekeeping</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="housekeeping.war">
+      <element id="artifact" artifact-name="housekeeping:war exploded" />
+    </root>
+  </artifact>
+</component>

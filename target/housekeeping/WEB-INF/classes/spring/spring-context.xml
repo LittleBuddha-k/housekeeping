@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--开启注解扫描,只希望扫描Service、Dao。Controller不需要Spring处理-->
+    <context:component-scan base-package="com.littlebuddha.housekeeping">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--1 引入属性文件，在配置中占位使用 -->
+    <!--<context:property-placeholder location="classpath*:properties/jdbc.properties"/>-->
+    <util:properties location="classpath:properties/jdbc.properties" id="jdbcConfig"/>
+
+    <!--Spring整合Mybatis框架-->
+    <!--配置连接池-->
+    <!--<bean id="comboPooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        &lt;!&ndash;驱动类名 &ndash;&gt;
+        <property name="driverClass" value="${jdbc.driver}" />
+        &lt;!&ndash; url &ndash;&gt;
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        &lt;!&ndash; 用户名 &ndash;&gt;
+        <property name="user" value="${jdbc.name}" />
+        &lt;!&ndash; 密码 &ndash;&gt;
+        <property name="password" value="${jdbc.password}" />
+        &lt;!&ndash; 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数  &ndash;&gt;
+        <property name="acquireIncrement" value="5"></property>
+        &lt;!&ndash; 初始连接池大小 &ndash;&gt;
+        <property name="initialPoolSize" value="10"></property>
+        &lt;!&ndash; 连接池中连接最小个数 &ndash;&gt;
+        <property name="minPoolSize" value="5"></property>
+        &lt;!&ndash; 连接池中连接最大个数 &ndash;&gt;
+        <property name="maxPoolSize" value="20"></property>
+    </bean>-->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="url" value="#{jdbcConfig.url}"/>
+        <property name="driverClassName" value="#{jdbcConfig.driver}"></property>
+        <property name="username" value="#{jdbcConfig.username}"/>
+        <property name="password" value="#{jdbcConfig.password}"/>
+        <property name="initialSize" value="#{jdbcConfig.initialSize}"/>
+        <property name="maxActive" value="#{jdbcConfig.maxActive}"/>
+    </bean>
+
+    <!--配置SqlSessionFactory工厂-->
+    <bean id="sessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- sql映射文件路径 -->
+        <property name="mapperLocations" value="classpath*:com/littlebuddha/housekeeping/mapper/*/xml/*Mapper.xml"/>
+    </bean>
+
+    <!--配置接口所在文件-->
+    <!--4 自动扫描对象关系映射 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+        <property name="sqlSessionFactoryBeanName" value="sessionFactoryBean"></property>
+        <!-- 指定要自动扫描接口的基础包，实现接口 -->
+        <property name="basePackage" value="com.littlebuddha.housekeeping.mapper"></property>
+    </bean>
+
+
+    <!--配置Spring框架声明事务管理-->
+    <!--配置事务管理器-->
+    <bean id="dataSourceTransaction" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--配置AOP增强--><!--public 返回值 包名.服务层.所有方法名(任意参数)-->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.littlebuddha.housekeeping.service.*.*Service.*(..))"/>
+    </aop:config>
+
+    <!--配置事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="dataSourceTransaction">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+            <!--<tx:method name="*" isolation="DEFAULT"/>-->
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- redis配置 -->
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="300"></property>
+        <property name="maxIdle" value="200"></property>
+        <property name="MaxWaitMillis" value="10000"></property>
+        <property name="testOnBorrow" value="true"></property>
+        <property name="testOnReturn" value="true"></property>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="127.0.0.1"></property>
+        <property name="port" value="6379"></property>
+        <property name="poolConfig" ref="jedisConfig"></property>
+    </bean>
+
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+
+        <property name="keySerializer">
+            <bean
+                    class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean
+                    class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+
+        <property name="hashKeySerializer">
+            <bean
+                    class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean
+                    class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+
+    </bean>
+
+    <!--引入shiro的核心包-->
+    <import resource="classpath:spring/spring-shiro.xml"/>
+</beans>
