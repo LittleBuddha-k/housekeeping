@@ -2,7 +2,7 @@ package com.littlebuddha.housekeeping.entity.other;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.littlebuddha.housekeeping.common.utils.UserUtils;
-import com.littlebuddha.housekeeping.entity.systemsettings.Operator;
+import com.littlebuddha.housekeeping.entity.system.Operator;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;

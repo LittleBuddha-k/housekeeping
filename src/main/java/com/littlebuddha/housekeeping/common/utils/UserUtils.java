@@ -1,12 +1,12 @@
 package com.littlebuddha.housekeeping.common.utils;
 
-import com.littlebuddha.housekeeping.entity.systemsettings.Menu;
-import com.littlebuddha.housekeeping.entity.systemsettings.Operator;
-import com.littlebuddha.housekeeping.entity.systemsettings.Role;
-import com.littlebuddha.housekeeping.mapper.systemsettings.MenuMapper;
-import com.littlebuddha.housekeeping.mapper.systemsettings.OperatorRoleMapper;
-import com.littlebuddha.housekeeping.mapper.systemsettings.RoleMapper;
-import com.littlebuddha.housekeeping.mapper.systemsettings.RoleMenuMapper;
+import com.littlebuddha.housekeeping.entity.system.Menu;
+import com.littlebuddha.housekeeping.entity.system.Operator;
+import com.littlebuddha.housekeeping.entity.system.Role;
+import com.littlebuddha.housekeeping.mapper.system.MenuMapper;
+import com.littlebuddha.housekeeping.mapper.system.OperatorRoleMapper;
+import com.littlebuddha.housekeeping.mapper.system.RoleMapper;
+import com.littlebuddha.housekeeping.mapper.system.RoleMenuMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.littlebuddha.housekeeping.mapper.system.ProvinceMapper">
+    <sql id="provinceColumns">
+        id AS "id",
+        code AS "code",
+        name AS "name",
+        short_name AS "shortName",
+        lng AS "lng",
+        lat AS "lat",
+        sort AS "sort",
+        create_date AS "createDate",
+        update_date AS "updateDate",
+        remarks AS "remarks",
+        status AS "status",
+        tenant_code AS "tenantCode"
+    </sql>
+
+    <select id="get" resultType="com.littlebuddha.housekeeping.entity.system.Province">
+        SELECT
+        <include refid="provinceColumns"/>
+        FROM system_province
+        WHERE id=#{id}
+    </select>
+
+    <select id="findList" resultType="com.littlebuddha.housekeeping.entity.system.Province">
+        SELECT
+        <include refid="provinceColumns"/>
+        FROM system_province a
+        <where>
+            <!-- 判断条件参数是否为空 -->
+            <if test="code != null and code != ''">
+                and a.code = #{code}
+            </if>
+            <if test="name != null and name != ''">
+                and a.name = #{name}
+            </if>
+            <if test="shortName != null and shortName != ''">
+                and a.short_name = #{shortName}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+                LIMIT #{page.start},#{page.length}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+                LIMIT #{page.start},#{page.length}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="com.littlebuddha.housekeeping.entity.system.Province">
+        SELECT
+        <include refid="provinceColumns"/>
+        FROM system_province a
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO system_province(
+            id,
+            code,
+            name,
+            short_name,
+            lng,
+            lat,
+            sort,
+            create_date,
+            update_date,
+            remarks,
+            status
+        )VALUES (
+            #{id},
+            #{code},
+            #{name},
+            #{shortName},
+            #{lng},
+            #{lat},
+            #{sort},
+            #{createDate},
+            #{updateDate},
+            #{remarks},
+            #{status}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE system_province SET
+            id = #{id},
+            code = #{code},
+            name = #{name},
+            short_name = #{shortName},
+            lng = #{lng},
+            lat = #{lat},
+            sort = #{sort},
+            create_date = #{createDate},
+            update_date = #{updateDate},
+            remarks = #{remarks},
+            status = #{status}
+        WHERE id=#{id}
+    </update>
+
+    <update id="deleteByLogic">
+        UPDATE system_province SET is_delete = 1
+        WHERE id=#{id}
+    </update>
+
+    <update id="recover">
+        UPDATE system_province SET is_delete = 0
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteByPhysics">
+        DELETE FROM system_province
+        WHERE id=#{id}
+    </delete>
+</mapper>

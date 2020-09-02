@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.littlebuddha.housekeeping.mapper.system.RoleMapper">
+    <sql id="roleColumns">
+        id AS "id",
+        name AS "name",
+        data_type AS "dataType",
+        status AS "status",
+        create_by AS "createBy.id",
+        create_date AS "createDate",
+        update_by AS "updateBy.id",
+        update_date AS "updateDate",
+        remarks AS "remarks",
+        is_delete AS "isDelete"
+    </sql>
+
+    <select id="get" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM system_role a
+        WHERE id=#{id}
+    </select>
+
+    <select id="findRolesByOperator" resultType="java.lang.String">
+        SELECT DISTINCT b.name FROM system_operator_role a,system_role b
+        WHERE a.operator_id=#{id} AND a.role_id=b.id
+    </select>
+
+    <select id="findList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM system_role a
+        <where>
+            <!-- 判断条件参数是否为空 -->
+            <if test="name != null and name != ''">
+                and a.name = #{name}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+                LIMIT #{page.start},#{page.length}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+                LIMIT #{page.start},#{page.length}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM system_role a
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO system_role(
+            id,
+            name,
+            data_type,
+            status,
+            create_by,
+            create_date,
+            update_by,
+            update_date,
+            remarks,
+            is_delete
+        )VALUES (
+            #{id},
+            #{name},
+            #{dataType},
+            #{status},
+            #{createBy.id},
+            #{createDate},
+            #{updateBy.id},
+            #{updateDate},
+            #{remarks},
+            #{isDelete}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE system_role SET
+            name = #{name},
+            data_type = #{dataType},
+            status = #{status},
+            create_by = #{createBy.id},
+            create_date = #{createDate},
+            update_by = #{updateBy.id},
+            update_date = #{updateDate},
+            remarks = #{remarks},
+            is_delete = #{isDelete}
+        WHERE id=#{id}
+    </update>
+
+    <update id="deleteByLogic">
+        UPDATE system_role SET is_delete = 1
+        WHERE id=#{id}
+    </update>
+
+    <update id="recover">
+        UPDATE system_role SET is_delete = 0
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteByPhysics">
+        DELETE FROM system_role
+        WHERE id=#{id}
+    </delete>
+</mapper>

@@ -1,5 +1,5 @@
 import com.littlebuddha.housekeeping.mapper.test.TestMapper;
-import com.littlebuddha.housekeeping.service.systemsettings.OperatorService;
+import com.littlebuddha.housekeeping.service.system.OperatorService;
 import com.littlebuddha.housekeeping.test.TestEntity;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.Test;

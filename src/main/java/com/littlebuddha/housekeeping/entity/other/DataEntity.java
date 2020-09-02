@@ -2,7 +2,7 @@ package com.littlebuddha.housekeeping.entity.other;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.littlebuddha.housekeeping.common.other.AutoId;
-import com.littlebuddha.housekeeping.entity.systemsettings.Operator;
+import com.littlebuddha.housekeeping.entity.system.Operator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

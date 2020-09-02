@@ -7,3 +7,9 @@
 <link rel="stylesheet" href="${ctxStatic}/gentelella/build/css/custom.min.css"/>
 <link rel="stylesheet" href="${ctxStatic}/gentelella/vendors/iCheck/skins/flat/green.css"/>
 <link rel="stylesheet" href="${ctxStatic}/gentelella/vendors/jqvmap/dist/jqvmap.min.css"/>
+
+<%--引入自定义css文件--%>
+<link rel="stylesheet" href="${ctxStatic}/housekeeping/housekeeping.css"/>
+
+<%--jsp模板数据渲染--%>
+<script src="${ctxStatic}/js/laytpl/laytpl.js"></script>

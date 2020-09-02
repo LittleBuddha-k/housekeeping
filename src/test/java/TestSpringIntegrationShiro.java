@@ -1,6 +1,6 @@
-import com.littlebuddha.housekeeping.entity.systemsettings.Operator;
-import com.littlebuddha.housekeeping.mapper.systemsettings.MenuMapper;
-import com.littlebuddha.housekeeping.mapper.systemsettings.RoleMapper;
+import com.littlebuddha.housekeeping.entity.system.Operator;
+import com.littlebuddha.housekeeping.mapper.system.MenuMapper;
+import com.littlebuddha.housekeeping.mapper.system.RoleMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.SecurityManager;

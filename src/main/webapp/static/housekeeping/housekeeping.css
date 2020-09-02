@@ -1,0 +1,9 @@
+.navigation-bar-menu {
+    float: left;
+    margin: 17px 10px;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+}
