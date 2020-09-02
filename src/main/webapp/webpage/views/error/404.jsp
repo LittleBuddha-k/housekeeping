@@ -12,8 +12,6 @@
 <html>
 <head>
     <title>智能家居平台</title>
-   <%-- <%@include file="/webpage/views/other/bootstrap.jsp" %>
-    <%@include file="/webpage/views/other/datatable.jsp" %>--%>
 </head>
 <body>
 <%--正文--%>
