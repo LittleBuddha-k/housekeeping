@@ -37,6 +37,18 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-sitemap"></i>系统设置<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
+                            <li><a href="${ctx}/system/menu/list">菜单管理</span></a>
+                                <%--<ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="${ctx}/system/province/list">省级管理</a>
+                                    </li>
+                                    <li><a href="${ctx}/system/city/list">市级管理</a>
+                                    </li>
+                                    <li><a href="${ctx}/system/area/list">区级管理</a>
+                                    </li>
+                                    <li><a href="${ctx}/system/street/list">街级管理</a>
+                                    </li>
+                                </ul>--%>
+                            </li>
                             <li><a>地域管理<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li class="sub_menu"><a href="${ctx}/system/province/list">省级管理</a>
@@ -48,7 +60,6 @@
                                     <li><a href="${ctx}/system/street/list">街级管理</a>
                                     </li>
                                 </ul>
-                            </li>
                             </li>
                         </ul>
                     </li>

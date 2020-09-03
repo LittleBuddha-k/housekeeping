@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,12 +34,55 @@ public class MenuController {
         return menu;
     }
 
-    @RequiresPermissions("systemsettings:menu:list")
+    @RequiresPermissions("system:menu:list")
     @RequestMapping(value = {"/list", ""})
     public String list(Menu menu, Model model) {
+        List<Menu> list = menuService.findList(menu);
+        model.addAttribute("list", list);
         model.addAttribute("menu", menu);
-        return "systemsettings/menuList";
+        return "system/menuList";
     }
+
+
+/*    树形结构排序
+   @param parentId  父节点ID
+   @param itemCatsBeforeList  源数据    原始查询的数据
+   @param itemCatsAfterList  目标数据   新创建的集合
+   @return
+
+    protected List<Menu> sort(String parentId, List<Menu> itemCatsBeforeList, List<Menu> itemCatsAfterList) {
+        for (Menu entity : itemCatsBeforeList) {
+            if (entity.getParentId().equals(parentId)) {
+                itemCatsAfterList.add(entity);
+                sort(entity.getId(), itemCatsBeforeList, itemCatsAfterList);
+            }
+        }
+        return itemCatsAfterList;
+    }*/
+
+
+   /* 排序
+    @param sourceList 数据源集合
+    @param targetList 排序后的集合
+    @param parentId 当前的父级类目 ID
+
+    private void sortList(List<TbContentCategory> sourceList, List<TbContentCategory> targetList, Long parentId) {
+        for (TbContentCategory sourceContentCategory : sourceList) {
+            if (sourceContentCategory.getParentId().equals(parentId)) {
+                targetList.add(sourceContentCategory);
+
+                // 判断有没有子节点，有则继续追加
+                if (sourceContentCategory.getParent()) {
+                    for (TbContentCategory tbContentCategory : sourceList) {
+                        if (tbContentCategory.getParentId().equals(sourceContentCategory.getId())) {
+                            sortList(sourceList, targetList, sourceContentCategory.getId());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }*/
 
     @ResponseBody
     @RequestMapping("/data")
