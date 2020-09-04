@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @Controller
-@RequestMapping("/systemsettings/operator")
+@RequestMapping("/system/operator")
 public class OperatorController {
 
     HiddenHttpMethodFilter hiddenHttpMethodFilter;
@@ -35,11 +35,11 @@ public class OperatorController {
         return operator;
     }
 
-    @RequiresPermissions("systemsettings:operator:list")
+    @RequiresPermissions("system:operator:list")
     @RequestMapping("/list")
     public String list(Operator operator, Model model){
         model.addAttribute("operator",operator);
-        return "systemsettings/operatorList";
+        return "system/operatorList";
     }
 
     @ResponseBody

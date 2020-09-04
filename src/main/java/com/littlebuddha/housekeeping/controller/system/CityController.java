@@ -1,5 +1,6 @@
 package com.littlebuddha.housekeeping.controller.system;
 
+import com.littlebuddha.housekeeping.entity.other.Page;
 import com.littlebuddha.housekeeping.entity.system.City;
 import com.littlebuddha.housekeeping.service.system.CityService;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -45,8 +48,7 @@ public class CityController {
 
     @ResponseBody
     @RequestMapping("/data")
-    public List<City> data(City city) {
-        List<City> cityList = cityService.findList(city);
-        return cityList;
+    public Page<City> data(HttpServletRequest request, HttpServletResponse response, City city) {
+        return cityService.findPage(new Page<>(request,response),city);
     }
 }

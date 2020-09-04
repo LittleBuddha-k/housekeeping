@@ -67,6 +67,9 @@ public class Page<E> {
     }
 
     public Integer getLength() {
+        if(length == -1){
+            this.length = getRecordsTotal();
+        }
         return length;
     }
 

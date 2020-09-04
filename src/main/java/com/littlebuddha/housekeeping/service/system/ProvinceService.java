@@ -34,12 +34,7 @@ public class ProvinceService extends BaseService<Province, ProvinceMapper> {
     }
 
     public Page<Province> findPage(Page<Province> page,Province province){
-        List<Province> provinceList = provinceMapper.findList(province);
-        page.setData(provinceList);
-        int filtered = super.findAllList(province).size();
-        page.setRecordsFiltered(filtered);
-        page.setRecordsTotal(filtered);
-        return page;
+        return super.findPage(page,province);
     }
 
     @Transactional

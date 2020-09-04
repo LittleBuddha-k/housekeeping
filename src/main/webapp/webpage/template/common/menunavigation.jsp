@@ -61,6 +61,10 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a href="${ctx}/system/operator/list">用户管理</a>
+                            </li>
+                            <li><a href="${ctx}/system/role/list">角色管理</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -79,7 +83,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="${ctx}/louOut">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

@@ -61,11 +61,11 @@ public class BaseService<E extends DataEntity,M extends BaseMapper<E>> {
      *
      */
     public Page<E> findPage(Page<E> page,E entity){
-        List<E> list = mapper.findList(entity);
-        page.setData(list);
         int filtered = mapper.findAllList(entity).size();
         page.setRecordsFiltered(filtered);
         page.setRecordsTotal(filtered);
+        List<E> list = mapper.findList(entity);
+        page.setData(list);
         return page;
     }
 

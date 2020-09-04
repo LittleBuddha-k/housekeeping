@@ -37,10 +37,46 @@
         FROM system_area a
         <where>
             <!-- 判断条件参数是否为空 -->
+            <if test="code != null and code != ''">
+                and a.code = #{code}
+            </if>
             <if test="name != null and name != ''">
                 and a.name = #{name}
             </if>
+            <if test="shortName != null and shortName != ''">
+                and a.short_name = #{shortName}
+            </if>
         </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+                LIMIT #{page.start},#{page.length}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+                LIMIT #{page.start},#{page.length}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultType="com.littlebuddha.housekeeping.entity.system.Area">
+        SELECT
+        <include refid="areaColumns"/>
+        FROM system_area a
+        <where>
+            <!-- 判断条件参数是否为空 -->
+            <!--<if test="name != null and name != ''">
+                and a.name = #{name}
+            </if>-->
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC
+            </otherwise>
+        </choose>
     </select>
 
     <insert id="insert">

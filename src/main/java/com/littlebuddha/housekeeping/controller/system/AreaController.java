@@ -1,5 +1,6 @@
 package com.littlebuddha.housekeeping.controller.system;
 
+import com.littlebuddha.housekeeping.entity.other.Page;
 import com.littlebuddha.housekeeping.entity.system.Area;
 import com.littlebuddha.housekeeping.service.system.AreaService;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -44,8 +47,7 @@ public class AreaController {
 
     @ResponseBody
     @RequestMapping("/data")
-    public List<Area> data(Area area){
-        List<Area> areaList = areaService.findList(area);
-        return areaList;
+    public Page<Area> data(HttpServletRequest request, HttpServletResponse response, Area area){
+        return areaService.findPage(new Page<>(request,response),area);
     }
 }

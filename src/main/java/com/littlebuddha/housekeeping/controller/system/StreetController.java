@@ -1,5 +1,7 @@
 package com.littlebuddha.housekeeping.controller.system;
 
+import com.littlebuddha.housekeeping.entity.other.Page;
+import com.littlebuddha.housekeeping.entity.system.Area;
 import com.littlebuddha.housekeeping.entity.system.Street;
 import com.littlebuddha.housekeeping.service.system.StreetService;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -45,8 +49,7 @@ public class StreetController {
 
     @ResponseBody
     @RequestMapping("/data")
-    public List<Street> data(Street street){
-        List<Street> streetList = streetService.findList(street);
-        return streetList;
+    public Page<Street> data(HttpServletRequest request, HttpServletResponse response, Street street){
+        return streetService.findPage(new Page<>(request,response),street);
     }
 }

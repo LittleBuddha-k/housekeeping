@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/systemsettings/role")
+@RequestMapping("/system/role")
 public class RoleController {
 
     @Autowired
@@ -30,11 +30,11 @@ public class RoleController {
         return role;
     }
 
-    @RequiresPermissions("systemsettings:role:list")
+    @RequiresPermissions("system:role:list")
     @RequestMapping(value = {"/list", ""})
     public String list(Role role, Model model) {
         model.addAttribute("role", role);
-        return "systemsettings/roleList";
+        return "system/roleList";
     }
 
     @ResponseBody

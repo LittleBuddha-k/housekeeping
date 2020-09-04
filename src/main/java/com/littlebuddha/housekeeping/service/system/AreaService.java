@@ -1,6 +1,8 @@
 package com.littlebuddha.housekeeping.service.system;
 
+import com.littlebuddha.housekeeping.entity.other.Page;
 import com.littlebuddha.housekeeping.entity.system.Area;
+import com.littlebuddha.housekeeping.entity.system.City;
 import com.littlebuddha.housekeeping.mapper.system.AreaMapper;
 import com.littlebuddha.housekeeping.service.other.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class AreaService extends BaseService<Area, AreaMapper> {
     public List<Area> findList(Area area) {
         List<Area> list = areaMapper.findList(area);
         return list;
+    }
+
+    public Page<Area> findPage(Page<Area> page, Area area){
+        return super.findPage(page,area);
     }
 
     @Transactional

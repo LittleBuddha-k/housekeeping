@@ -1,5 +1,7 @@
 package com.littlebuddha.housekeeping.service.system;
 
+import com.littlebuddha.housekeeping.entity.other.Page;
+import com.littlebuddha.housekeeping.entity.system.City;
 import com.littlebuddha.housekeeping.entity.system.Street;
 import com.littlebuddha.housekeeping.mapper.system.StreetMapper;
 import com.littlebuddha.housekeeping.service.other.BaseService;
@@ -25,6 +27,10 @@ public class StreetService extends BaseService<Street, StreetMapper> {
     public List<Street> findList(Street street) {
         List<Street> list = streetMapper.findList(street);
         return list;
+    }
+
+    public Page<Street> findPage(Page<Street> page, Street street){
+        return super.findPage(page,street);
     }
 
     @Transactional
