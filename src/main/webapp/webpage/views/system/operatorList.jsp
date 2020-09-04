@@ -51,7 +51,7 @@ To change this template use File | Settings | File Templates.
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <table id="operator-table" class="table table-striped table-bordered bulk_action"
-                           style="width:100%">
+                           style="white-space: nowrap;">
                     </table>
                 </div>
             </div>

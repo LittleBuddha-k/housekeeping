@@ -10,17 +10,11 @@ To change this template use File | Settings | File Templates.
 <%@ include file="/webpage/template/common/taglib.jsp" %>
 <html lang="en">
 <head>
-    <title>猪儿虫网络爬虫</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico"/>
+    <title>猪儿虫网络爬虫</title>
     <%@include file="/webpage/template/common/gentelellacss.jsp" %>
     <%@include file="menu.js" %>
 </head>
-
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -29,19 +23,35 @@ To change this template use File | Settings | File Templates.
         <div class="right_col" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <table id="menu-table">
-                        <thead>
-                        <tr>
-                            <th>名称</th>
-                            <th>链接</th>
-                            <th>排序</th>
-                            <th>显示/隐藏</th>
-                            <th>权限标识</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
+                    <form id="query-form" data-parsley-validate class="form-horizontal form-label-left">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="first-name" name="name" required="required" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span
+                                    class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="last-name" name="shortName" required="required"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button class="btn btn-primary" type="reset">重置</button>
+                                <button type="submit" class="btn btn-success">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <table id="menu-table" class="table table-striped table-bordered bulk_action"
+                           style="white-space: nowrap;">
                     </table>
                 </div>
             </div>

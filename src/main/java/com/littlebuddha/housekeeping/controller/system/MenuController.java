@@ -2,6 +2,7 @@ package com.littlebuddha.housekeeping.controller.system;
 
 import com.littlebuddha.housekeeping.common.result.AjaxResult;
 import com.littlebuddha.housekeeping.common.utils.UserUtils;
+import com.littlebuddha.housekeeping.entity.other.Page;
 import com.littlebuddha.housekeeping.entity.system.Menu;
 import com.littlebuddha.housekeeping.entity.system.Operator;
 import com.littlebuddha.housekeeping.service.system.MenuService;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,9 +89,8 @@ public class MenuController {
 
     @ResponseBody
     @RequestMapping("/data")
-    public List<Menu> data(Menu menu, Model model) {
-        List<Menu> list = menuService.findList(menu);
-        return list;
+    public Page<Menu> data(HttpServletRequest request, HttpServletResponse response,Menu menu, Model model) {
+         return menuService.findPage(new Page<>(request, response), menu);
     }
 
     @RequestMapping("/form/{mode}")

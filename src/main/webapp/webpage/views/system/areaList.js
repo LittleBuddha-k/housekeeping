@@ -100,7 +100,8 @@
             },
             "lengthMenu": [[10, 25, 50, -1], ["10条", "25条", "50条", "全部"]],
             "pageLength": 10,
-            "pagingType": "full_numbers"  //只显示翻页按钮只显示数字
+            "pagingType": "full_numbers",  //只显示翻页按钮只显示数字
+            "scrollX": true,
         })
     })
 </script>

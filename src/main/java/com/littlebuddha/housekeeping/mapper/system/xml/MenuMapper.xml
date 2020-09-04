@@ -66,8 +66,7 @@
                 and a.parent_id = #{parentId}
             </if>
         </where>
-        ORDER BY sort
-        <!--<choose>
+        <choose>
             <when test="page !=null and page.orderBy != null and page.orderBy != ''">
                 ORDER BY ${page.orderBy}
                 LIMIT #{page.start},#{page.length}
@@ -76,7 +75,7 @@
                 ORDER BY a.create_date DESC
                 LIMIT #{page.start},#{page.length}
             </otherwise>
-        </choose>-->
+        </choose>
     </select>
 
     <select id="findAllList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">

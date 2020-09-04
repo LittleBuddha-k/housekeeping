@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <script>
     $(document).ready(function () {
-        var operatortable = $("#operator-table").DataTable({
+        var provincetable = $("#province-table").DataTable({
             //表示翻页时是否显示 processing信息（正在加载中），这个信息可以修改
             "processing": false,
             //bFilter: false,    //去掉搜索框方法三：这种方法可以
@@ -11,7 +11,7 @@
             "serverSide": true,
             "ajax": {
                 // url可以直接指定远程的json文件
-                url: "${ctx}/system/operator/data",
+                url: "${ctx}/system/province/data",
                 type: 'POST',
                 // 传给服务器的数据，可以添加我们自己的查询参数
                 data: function (param) {
@@ -100,7 +100,8 @@
             },
             "lengthMenu": [[10, 25, 50, -1], ["10条", "25条", "50条", "全部"]],
             "pageLength": 10,
-            "pagingType": "full_numbers"  //只显示翻页按钮只显示数字
+            "pagingType": "full_numbers",  //只显示翻页按钮只显示数字
+            "scrollX": true,
         })
     })
 </script>

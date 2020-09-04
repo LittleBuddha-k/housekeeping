@@ -13,7 +13,7 @@ To change this template use File | Settings | File Templates.
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico"/>
     <title>猪儿虫网络爬虫</title>
     <%@include file="/webpage/template/common/gentelellacss.jsp" %>
-    <%@include file="operatorList.js" %>
+    <%@include file="provinceList.js" %>
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -50,8 +50,8 @@ To change this template use File | Settings | File Templates.
                     </form>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <table id="operator-table" class="table table-striped table-bordered bulk_action"
-                           style="width:100%">
+                    <table id="province-table" class="table table-striped table-bordered bulk_action"
+                           style="width:100%;white-space: nowrap;">
                     </table>
                 </div>
             </div>

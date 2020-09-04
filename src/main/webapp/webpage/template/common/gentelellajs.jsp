@@ -49,15 +49,16 @@
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+<%--DataTable Treegrid--%>
+<script src="${ctxStatic}/plugins/dataTables.treeGrid.js"></script>
+
+
 <script src="${ctxStatic}/gentelella/vendors/jszip/dist/jszip.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>
-<%--treetable--%>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery-treetable/3.2.0/jquery.treetable.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery-treetable/3.2.0/jquery.treetable.min.js"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="${ctxStatic}/gentelella/build/js/custom.min.js"></script>
 
 <%--jsp模板数据渲染--%>
-<script src="${ctxStatic}/js/laytpl/laytpl.js"></script>
+<script src="${ctxStatic}/plugins/laytpl/laytpl.js"></script>
