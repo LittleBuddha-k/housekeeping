@@ -34,5 +34,9 @@
 <%--引入自定义css文件--%>
 <link rel="stylesheet" href="${ctxStatic}/housekeeping/housekeeping.css"/>
 
+<%--jQuery treetable树形表--%>
+<link rel="stylesheet" href="${ctxStatic}/plugins/jquerytreetable/css/jquery.treetable.css"/>
+
+
 <%--引入Jquery--%>
 <script src="${ctxStatic}/jquery/jquery-3.3.1.min.js"></script>

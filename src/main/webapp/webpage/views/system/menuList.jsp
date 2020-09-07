@@ -52,6 +52,29 @@ To change this template use File | Settings | File Templates.
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <table id="menu-table" class="table table-striped table-bordered bulk_action"
                            style="white-space: nowrap;">
+                        <thead>
+                        <tr role="row">
+                            <th> 类目ID </th>
+                            <th> 类目名称 </th>
+                            <th> 链接</th>
+                            <th> 显示/隐藏</th>
+                            <th> 排序</th>
+                            <th>权限标识</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${list}" var="itemcat">
+                            <%--注意：此处的 id 和pId 是重点--%>
+                            <tr id="${itemcat.id}" pId="${itemcat.parentId}">
+                                <td>${itemcat.id}</td>
+                                <td>${itemcat.name}</td>
+                                <td>${itemcat.href}</td>
+                                <td>${itemcat.isShow}</td>
+                                <td>${itemcat.sort}</td>
+                                <td>${itemcat.permission}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -31,7 +31,7 @@ public class MenuService extends BaseService<Menu, MenuMapper> {
         List<Menu> list = menuMapper.findList(menu);
         //一级菜单
         for (Menu oneMenu : list) {
-            if ("0".equals(oneMenu.getParentId())) {
+            if ("1".equals(oneMenu.getParentId())) {
                 dataMenus.add(oneMenu);//加入一级菜单
             }
         }

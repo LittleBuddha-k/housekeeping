@@ -107,17 +107,17 @@
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                        id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="${sessionScope.currentUser.picture}" alt="">John Doe
+                        <img src="${sessionScope.currentUser.picture}" alt="">
+                        <shiro:principal property="name" />
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:;"> Profile</a>
+                        <a class="dropdown-item" href="javascript:;">个人资料</a>
                         <a class="dropdown-item" href="javascript:;">
                             <span class="badge bg-red pull-right">50%</span>
-                            <span>Settings</span>
+                            <span>资料设置</span>
                         </a>
-                        <a class="dropdown-item" href="javascript:;">Help</a>
-                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log
-                            Out</a>
+                        <a class="dropdown-item" href="javascript:;">帮助</a>
+                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i>退出登录</a>
                     </div>
                 </li>
 

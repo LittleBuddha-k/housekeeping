@@ -109,7 +109,7 @@ public class Menu extends DataEntity<Menu> {
         this.operator = operator;
     }
 
-    public Integer isHasChildren() {
+    public Integer getHasChildren() {
         return hasChildren;
     }
 
