@@ -12,13 +12,15 @@ To change this template use File | Settings | File Templates.
 <head>
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico"/>
     <title>猪儿虫网络爬虫</title>
-    <%@include file="/webpage/template/common/gentelellacss.jsp" %>
+    <%--引入Jquery--%>
+    <script src="${ctxStatic}/jquery/jquery-3.3.1.min.js"></script>
     <%@include file="menu.js" %>
+    <%@include file="/webpage/template/common/commoncss.jsp" %>
 </head>
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <%@include file="/webpage/template/common/menunavigation.jsp" %>
+        <%@include file="/webpage/template/common/public.jsp" %>
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="row">
@@ -62,10 +64,10 @@ To change this template use File | Settings | File Templates.
                             <th>权限标识</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="menu-table-body">
                         <c:forEach items="${list}" var="itemcat">
                             <%--注意：此处的 id 和pId 是重点--%>
-                            <tr id="${itemcat.id}" pId="${itemcat.parentId}">
+                            <tr data-tt-id="${itemcat.id}" data-tt-parent-id="${itemcat.parentId}">
                                 <td>${itemcat.id}</td>
                                 <td>${itemcat.name}</td>
                                 <td>${itemcat.href}</td>
@@ -86,7 +88,7 @@ To change this template use File | Settings | File Templates.
     </div>
 </div>
 
-<%@include file="/webpage/template/common/gentelellajs.jsp" %>
+<%@include file="/webpage/template/common/commonjs.jsp" %>
 
 </body>
 </html>

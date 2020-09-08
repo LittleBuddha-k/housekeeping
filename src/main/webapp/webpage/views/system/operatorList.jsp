@@ -12,13 +12,13 @@ To change this template use File | Settings | File Templates.
 <head>
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico"/>
     <title>猪儿虫网络爬虫</title>
-    <%@include file="/webpage/template/common/gentelellacss.jsp" %>
+    <%@include file="/webpage/template/common/commoncss.jsp" %>
     <%@include file="operatorList.js" %>
 </head>
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <%@include file="/webpage/template/common/menunavigation.jsp" %>
+        <%@include file="/webpage/template/common/public.jsp" %>
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="row">
@@ -29,7 +29,8 @@ To change this template use File | Settings | File Templates.
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="first-name" name="name" required="required" class="form-control ">
+                                <input type="text" id="first-name" name="name" required="required"
+                                       class="form-control ">
                             </div>
                         </div>
                         <div class="item form-group">
@@ -49,9 +50,26 @@ To change this template use File | Settings | File Templates.
                         </div>
                     </form>
                 </div>
+                <%--功能按钮--%>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <shiro:hasPermission name="system:operator:add">
+                        <button type="button" id="add" class="btn btn-info" onclick="add()">新建</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:edit">
+                        <button type="button" id="edit" class="btn btn-warning" onclick="edit()">编辑</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:del">
+                        <button type="button" id="del" class="btn btn-danger" onclick="del()">删除</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:view">
+                        <button type="button" id="view" class="btn btn-info" onclick="view()">查看</button>
+                    </shiro:hasPermission>
+
+                    <a href="#" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
+                </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <table id="operator-table" class="table table-striped table-bordered bulk_action"
-                           style="white-space: nowrap;">
+                           style="width:100%;white-space: nowrap;">
                     </table>
                 </div>
             </div>
@@ -63,7 +81,7 @@ To change this template use File | Settings | File Templates.
     </div>
 </div>
 
-<%@include file="/webpage/template/common/gentelellajs.jsp" %>
+<%@include file="/webpage/template/common/commonjs.jsp" %>
 
 </body>
 </html>

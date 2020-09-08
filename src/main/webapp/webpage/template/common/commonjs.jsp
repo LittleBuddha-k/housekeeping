@@ -1,6 +1,5 @@
 <!-- jQuery -->
 <script src="${ctxStatic}/gentelella/vendors/jquery/dist/jquery.min.js"></script>
-<script src="${ctxStatic}/jquery/jquery.serializejson.js"></script>
 <!-- Bootstrap -->
 <script src="${ctxStatic}/gentelella/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- FastClick -->
@@ -36,6 +35,7 @@
 <!-- bootstrap-daterangepicker -->
 <script src="${ctxStatic}/gentelella/vendors/moment/min/moment.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 <!-- Datatables -->
 <script src="${ctxStatic}/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -49,10 +49,6 @@
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<%--DataTable Treegrid--%>
-<script src="${ctxStatic}/plugins/dataTables.treeGrid.js"></script>
-
-
 <script src="${ctxStatic}/gentelella/vendors/jszip/dist/jszip.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="${ctxStatic}/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>

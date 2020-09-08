@@ -21,7 +21,7 @@
                    var draw = param.draw;
                    var index =param.order[0].column;
                    var sort = param.order[0].dir;
-                   var name = param.columns[index].data;
+                   var name = param.columns[index].name;
                    var orderBy = name + " " + sort;
                    queryParams = $("#query-form").serialize() + "&page.start=" + param.start + "&page.length=" + param.length + "&page.draw=" + param.draw + "&page.orderBy=" + orderBy;
                    console.log("打印请求参数："+ queryParams);
@@ -44,13 +44,79 @@
             },
             "columns": [
                 {
+                    "orderable" : false,
+                    title:'<input type="checkbox" class="checkAll"/>',
+                    "render": function (data, type, full, meta) {
+                        return '<input type="checkbox" class="checkchild"/>';
+                    },
+                    name:"id",
+                },
+                {
                     title:'ID',
                     data: 'id',
-                    orderable: true,
+                    name: 'id',
                 },
                 {
                     title:'名称',
                     data: 'name',
+                    name: 'name',
+                },
+                {
+                    title:'出生日期',
+                    data: function (data) {
+                        return getMyDate(data.birthday);
+                    },
+                    name: 'birthday',
+                },
+                {
+                    title:'地址',
+                    data: 'address',
+                    name: 'address',
+                },
+                {
+                    title:'性别',
+                    data: function (data) {
+                        if(data.sex == 0){
+                            return '男';
+                        }else{
+                            return '女';
+                        };
+                    },
+                    name: 'sex',
+                },
+                {
+                    title:'年龄',
+                    data: 'age',
+                    name: 'age',
+                },{
+                    title:'婚否',
+                    data: function (data) {
+                        if(data.isMarry == 0){
+                            return '未婚';
+                        }else{
+                            return '已婚';
+                        };
+                    },
+                    name: 'isMarry',
+                },
+                {
+                    title:'爱好',
+                    data: 'hobby',
+                    name: 'hobby',
+                },{
+                    title:'特长',
+                    data: 'specialty',
+                    name: 'specialty',
+                },
+                {
+                    title:'大学',
+                    data: 'university',
+                    name: 'university',
+                },
+                {
+                    title:'电话',
+                    data: 'phone',
+                    name: 'phone',
                 },
             ],
             "oLanguage": {
@@ -71,7 +137,49 @@
             },
             "lengthMenu": [[10, 25, 50, -1], ["10条", "25条", "50条", "全部"]],
             "pageLength": 10,
-            "pagingType": "full_numbers"  //只显示翻页按钮只显示数字
+            "pagingType": "full_numbers",  //只显示翻页按钮只显示数字
+            "scrollX": true,
         })
-    })
+    });
+
+    //将时间戳格式化
+    function getMyDate(time){
+        if(typeof(time)=="undefined"){
+            return "";
+        }
+        var oDate = new Date(time),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+
+        return oTime;
+    };
+
+    //补0操作,当时间数据小于10的时候，给该数据前面加一个0
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    };
+
+    function add() {
+        alert("点我增加")
+    };
+
+    function edit() {
+        alert("点我编辑")
+    };
+
+    function del() {
+        alert("点我删除")
+    };
+
+    function view() {
+        alert("点我查看")
+    };
 </script>

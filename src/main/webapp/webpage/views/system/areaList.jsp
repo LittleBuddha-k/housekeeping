@@ -12,13 +12,13 @@ To change this template use File | Settings | File Templates.
 <head>
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico"/>
     <title>猪儿虫网络爬虫</title>
-    <%@include file="/webpage/template/common/gentelellacss.jsp" %>
+    <%@include file="/webpage/template/common/commoncss.jsp" %>
     <%@include file="areaList.js" %>
 </head>
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <%@include file="/webpage/template/common/menunavigation.jsp" %>
+        <%@include file="/webpage/template/common/public.jsp" %>
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="row">
@@ -63,7 +63,7 @@ To change this template use File | Settings | File Templates.
     </div>
 </div>
 
-<%@include file="/webpage/template/common/gentelellajs.jsp" %>
+<%@include file="/webpage/template/common/commonjs.jsp" %>
 
 </body>
 </html>

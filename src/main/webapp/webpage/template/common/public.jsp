@@ -117,7 +117,7 @@
                             <span>资料设置</span>
                         </a>
                         <a class="dropdown-item" href="javascript:;">帮助</a>
-                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i>退出登录</a>
+                        <a class="dropdown-item" href="${ctx}/logOut"><i class="fa fa-sign-out pull-right"></i>退出登录</a>
                     </div>
                 </li>
 

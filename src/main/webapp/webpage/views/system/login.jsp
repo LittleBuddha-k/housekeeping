@@ -12,7 +12,7 @@ To change this template use File | Settings | File Templates.
   <head>
     <link rel="icon" href="${ctxStatic}/gentelella/production/images/favicon.jpg" type="image/ico" />
     <title>Gentelella Alela! | </title>
-    <%@include file="/webpage/template/common/gentelellacss.jsp" %>
+    <%@include file="/webpage/template/common/commoncss.jsp" %>
   </head>
 
   <body class="login">
