@@ -49,19 +49,32 @@ public class OperatorController {
         return operatorPage;
     }
 
+    /**
+     * 是为增、删、改、查做的form表单
+     * @param mode
+     * @param operator
+     * @param model
+     * @return
+     */
     @RequestMapping("/form/{mode}")
     public String form(@PathVariable(name = "mode")String mode, Operator operator, Model model){
         model.addAttribute("operator",operator);
         model.addAttribute("mode",mode);
-        return "systemsettings/operatorForm";
+        return "system/operatorForm";
     }
 
+    /**
+     * 是为点击个人信息时所展示的当前登录用户的form表单
+     * @param operator
+     * @param model
+     * @return
+     */
     @RequestMapping("/form/info")
     public String form(Operator operator, Model model){
         Subject subject = SecurityUtils.getSubject();
         operator = (Operator) subject.getPrincipal();
         model.addAttribute("operator",operator);
-        return "systemsettings/operatorForm";
+        return "system/operatorForm";
     }
 
     @ResponseBody
