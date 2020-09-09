@@ -21,7 +21,7 @@ public class Operator extends DataEntity<Operator> {
     private Date birthday;//出生日期
 
     private String address;//地址
-    private Integer sex;//性别 性别 0-男 1-女
+    private String sex;//性别 性别 0-男 1-女
     private Integer age;//年龄
     private Integer isMarry;//婚否 婚否 0-未婚 1-已婚
     private String hobby;//爱好
@@ -97,11 +97,11 @@ public class Operator extends DataEntity<Operator> {
         this.address = address;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

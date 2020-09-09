@@ -22,6 +22,7 @@ To change this template use File | Settings | File Templates.
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="row">
+                <%--查询表格--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <form id="query-form" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="item form-group">
@@ -67,6 +68,7 @@ To change this template use File | Settings | File Templates.
 
                     <a href="#" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
                 </div>
+                <%--信息列表表格--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <table id="operator-table" class="table table-striped table-bordered bulk_action"
                            style="width:100%;white-space: nowrap;">

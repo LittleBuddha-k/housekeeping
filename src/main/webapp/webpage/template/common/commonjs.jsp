@@ -61,3 +61,6 @@
 
 <%--jQuery树形表js--%>
 <script src="${ctxStatic}/plugins/jquerytreetable/jquery.treetable.js"></script>
+
+<%--jQuery树形表js--%>
+<script src="${ctxStatic}/housekeeping/common/hk.js"></script>

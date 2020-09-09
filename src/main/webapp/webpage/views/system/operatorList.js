@@ -45,9 +45,10 @@
             "columns": [
                 {
                     "orderable" : false,
-                    title:'<input type="checkbox" class="checkAll"/>',
+                    title:'<input type="checkbox" class="checkAll" id="checkAll" name="checkAll"/>',
+                    data: 'id',
                     "render": function (data, type, full, meta) {
-                        return '<input type="checkbox" class="checkchild"/>';
+                        return "<input type='checkbox' class='checkChild' id='checkChild' name='checkChild' value='"+data+"'/>";
                     },
                     name:"id",
                 },
@@ -168,18 +169,38 @@
     };
 
     function add() {
-        alert("点我增加")
+        hk.open("${ctx}/system/operator/form/add","用户新增");
     };
 
     function edit() {
-        alert("点我编辑")
+        var id = hk.getSelectId();
+        if(id.length > 1){
+            alert("只能选择一条记录进行编辑!!!")
+        }else {
+            hk.open("${ctx}/system/operator/form/edit?id="+id,"用户编辑");
+        }
     };
 
     function del() {
-        alert("点我删除")
+        var id = hk.getSelectId();
+        if(id.length > 1){
+            alert("只能选择一条记录进行编辑!!!")
+        }else {
+            var b = confirm("确认删除记录信息吗？");
+            if (b){
+                alert("他说是的");
+            }else {
+                alert("他说不是")
+            }
+        }
     };
 
     function view() {
-        alert("点我查看")
+        var id = hk.getSelectId();
+        if(id.length > 1){
+            alert("只能选择一条记录进行浏览!!!")
+        }else {
+            hk.open("${ctx}/system/operator/form/view","用户浏览");
+        }
     };
 </script>
