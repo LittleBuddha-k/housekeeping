@@ -21,7 +21,7 @@
                    var draw = param.draw;
                    var index =param.order[0].column;
                    var sort = param.order[0].dir;
-                   var name = param.columns[index].data;
+                   var name = param.columns[index].name;
                    var orderBy = name + " " + sort;
                    queryParams = $("#query-form").serialize() + "&page.start=" + param.start + "&page.length=" + param.length + "&page.draw=" + param.draw + "&page.orderBy=" + orderBy;
                    console.log("打印请求参数："+ queryParams);
@@ -44,24 +44,38 @@
             },
             "columns": [
                 {
+                    "orderable" : false,
+                    title:'<input type="checkbox" class="checkAll" id="checkAll" name="checkAll"/>',
+                    data: 'id',
+                    "render": function (data, type, full, meta) {
+                        return "<input type='checkbox' class='checkChild' id='checkChild' name='checkChild' value='"+data+"'/>";
+                    },
+                    name:"id",
+                },
+                {
                     title:'ID',
                     data: 'id',
+                    name:"id",
                 },
                 {
                     title:'名称',
                     data: 'name',
+                    name:"name",
                 },
                 {
                     title:'数据类型',
                     data: 'remarks',
+                    name:"remarks",
                 },
                 {
                     title:'状态',
                     data: 'remarks',
+                    name:"remarks",
                 },
                 {
                     title:'备注',
                     data: 'remarks',
+                    name:"remarks",
                 },
 
             ],
@@ -85,6 +99,76 @@
             "pageLength": 10,
             "pagingType": "full_numbers",  //只显示翻页按钮只显示数字
             "scrollX": true,
-        })
-    })
+        });
+
+        $("#search-btn").click(function () {
+            var attribute = this.getAttribute('');
+            if(attribute){
+                alert("有这个变量")
+            }else{
+                alert("没这个变量");
+                $("#search-form").close()
+            }
+        });
+    });
+
+//将时间戳格式化
+function getMyDate(time){
+    if(typeof(time)=="undefined"){
+        return "";
+    }
+    var oDate = new Date(time),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth()+1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+
+    return oTime;
+};
+
+//补0操作,当时间数据小于10的时候，给该数据前面加一个0
+function getzf(num){
+    if(parseInt(num) < 10){
+        num = '0'+num;
+    }
+    return num;
+};
+
+function add() {
+    hk.open("${ctx}/system/role/form/add","角色新增");
+};
+
+function edit() {
+    var id = hk.getSelectId();
+    if(id.length > 1){
+        alert("只能选择一条角色信息进行编辑!!!")
+    }else {
+        hk.open("${ctx}/system/role/form/edit?id="+id,"角色编辑");
+    }
+};
+
+function deleteAll() {
+    var ids = hk.getSelectId();
+    if(ids.length >= 1){
+        var b = confirm("确认删除角色信息吗？");
+        if (b){
+            hk.get("${ctx}/system/role/deleteAll?ids="+ids,function (data) {
+                hk.info("删除成功");
+                operatortable.draw( false );/*重新绘制表格*/
+            });
+        }
+    }
+};
+
+function view() {
+    var id = hk.getSelectId();
+    if(id.length > 1){
+        alert("只能选择一条记录进行浏览!!!")
+    }else {
+        hk.open("${ctx}/system/role/form/view?id="+id,"角色浏览");
+    }
+};
 </script>

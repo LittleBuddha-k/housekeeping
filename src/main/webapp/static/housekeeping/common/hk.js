@@ -18,6 +18,12 @@
         open:function (url,title) {
             window.open(url,title,'height=60%, width=70%, top=10%,left=20%, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
         },
+        info:function(message){
+            alert(message);
+        },
+        confirm:function(message){
+          confirm(message);
+        },
         getSelectId:function () {
             var checkedBox = $("input[name='checkChild']:checked");
             if (checkedBox.length == 0) {
@@ -32,5 +38,17 @@
                 return chk_value;
             }
         },
+        get:function (url,callback) {
+            $.ajax({
+                url:url,
+                method:"get",
+                error:function(xhr,textStatus){
+                    hk.alert("操作失败");
+                },
+                success:function(data){
+                      callback(data);
+                }
+            });
+        }
     }
 })(jQuery);

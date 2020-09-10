@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <script>
+    var operatortable;
     $(document).ready(function () {
-        var operatortable = $("#operator-table").DataTable({
+        operatortable = $("#operator-table").DataTable({
             //表示翻页时是否显示 processing信息（正在加载中），这个信息可以修改
             "processing": false,
             //bFilter: false,    //去掉搜索框方法三：这种方法可以
@@ -23,8 +24,8 @@
                    var sort = param.order[0].dir;
                    var name = param.columns[index].name;
                    var orderBy = name + " " + sort;
-                   queryParams = $("#query-form").serialize() + "&page.start=" + param.start + "&page.length=" + param.length + "&page.draw=" + param.draw + "&page.orderBy=" + orderBy;
-                   console.log("打印请求参数："+ queryParams);
+                   queryParams = $("#search-form").serialize() + "&page.start=" + param.start + "&page.length=" + param.length + "&page.draw=" + param.draw + "&page.orderBy=" + orderBy;
+                   console.log("打印请求参数："+ $("#search-form").serialize());
                    return queryParams;
                 },
                 //用于处理返回数据
@@ -76,13 +77,7 @@
                 },
                 {
                     title:'性别',
-                    data: function (data) {
-                        if(data.sex == 0){
-                            return '男';
-                        }else{
-                            return '女';
-                        };
-                    },
+                    data: 'sex',
                     name: 'sex',
                 },
                 {
@@ -140,7 +135,17 @@
             "pageLength": 10,
             "pagingType": "full_numbers",  //只显示翻页按钮只显示数字
             "scrollX": true,
-        })
+        });
+
+        $("#search-btn").click(function () {
+            var attribute = this.getAttribute('');
+            if(attribute){
+                alert("有这个变量")
+            }else{
+                alert("没这个变量");
+                $("#search-form").close()
+            }
+        });
     });
 
     //将时间戳格式化
@@ -175,22 +180,21 @@
     function edit() {
         var id = hk.getSelectId();
         if(id.length > 1){
-            alert("只能选择一条记录进行编辑!!!")
+            alert("只能选择一条用户信息进行编辑!!!")
         }else {
             hk.open("${ctx}/system/operator/form/edit?id="+id,"用户编辑");
         }
     };
 
-    function del() {
-        var id = hk.getSelectId();
-        if(id.length > 1){
-            alert("只能选择一条记录进行编辑!!!")
-        }else {
-            var b = confirm("确认删除记录信息吗？");
+    function deleteAll() {
+        var ids = hk.getSelectId();
+        if(ids.length >= 1){
+            var b = confirm("确认删除用户信息吗？");
             if (b){
-                alert("他说是的");
-            }else {
-                alert("他说不是")
+                hk.get("${ctx}/system/operator/deleteAll?ids="+ids,function (data) {
+                    hk.info("删除成功");
+                    operatortable.draw( false );/*重新绘制表格*/
+                });
             }
         }
     };
@@ -200,7 +204,7 @@
         if(id.length > 1){
             alert("只能选择一条记录进行浏览!!!")
         }else {
-            hk.open("${ctx}/system/operator/form/view","用户浏览");
+            hk.open("${ctx}/system/operator/form/view?id="+id,"用户浏览");
         }
     };
 </script>

@@ -22,33 +22,50 @@ To change this template use File | Settings | File Templates.
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="row">
+                <%--查询--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <form id="query-form" data-parsley-validate class="form-horizontal form-label-left">
+                    <form:form id="search-form" modelAttribute="area" class="form-horizontal form-label-left">
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name
-                                <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">区名
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="first-name" name="name" required="required" class="form-control ">
+                                <form:input type="text" id="name" path="name" name="name" class="form-control "/>
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span
-                                    class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="shortName">简称
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="shortName" required="required"
-                                       class="form-control">
+                                <form:input type="text" id="shortName" path="shortName" name="shortName" required="required"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="item form-group">
                             <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button class="btn btn-primary" type="reset">重置</button>
+                                <button type="reset" class="btn btn-primary">重置</button>
                                 <button type="submit" class="btn btn-success">查询</button>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
+                <%--功能按钮--%>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <shiro:hasPermission name="system:operator:add">
+                        <button type="button" id="add" class="btn btn-info" onclick="add()">新建</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:edit">
+                        <button type="button" id="edit" class="btn btn-warning" onclick="edit()">编辑</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:del">
+                        <button type="button" id="del" class="btn btn-danger" onclick="deleteAll()">删除</button>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="system:operator:view">
+                        <button type="button" id="view" class="btn btn-info" onclick="view()">查看</button>
+                    </shiro:hasPermission>
+
+                    <a href="#" id="search-btn" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
+                </div>
+                <%--表格--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                     <table id="area-table" class="table table-striped table-bordered bulk_action"
                            style="width:100%;white-space: nowrap;">

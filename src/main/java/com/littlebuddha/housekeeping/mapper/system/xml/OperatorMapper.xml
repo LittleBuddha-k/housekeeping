@@ -60,6 +60,7 @@
         <include refid="operatorColumns"/>
         FROM system_operator a
         <where>
+            a.is_delete = #{DEL_FLAG_NORMAL}
             <!-- 判断条件参数是否为空 -->
             <if test="name != null and name != ''">
                 and a.name = #{name}

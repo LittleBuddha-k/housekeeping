@@ -24,32 +24,30 @@ To change this template use File | Settings | File Templates.
             <div class="row">
                 <%--查询表格--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <form id="query-form" data-parsley-validate class="form-horizontal form-label-left">
+                    <form:form id="search-form" modelAttribute="operator" class="form-horizontal form-label-left">
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name
-                                <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">名字
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="first-name" name="name" required="required"
-                                       class="form-control ">
+                                <form:input type="text" id="first-name" name="name"
+                                       class="form-control " path="name"/>
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span
-                                    class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">性别
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="last-name" name="shortName" required="required"
-                                       class="form-control">
+                                <form:input type="text" id="sex" name="sex"
+                                       class="form-control" path="sex"/>
                             </div>
                         </div>
                         <div class="item form-group">
                             <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button class="btn btn-primary" type="reset">重置</button>
+                                <button type="reset" class="btn btn-primary">重置</button>
                                 <button type="submit" class="btn btn-success">查询</button>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
                 <%--功能按钮--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -60,13 +58,13 @@ To change this template use File | Settings | File Templates.
                         <button type="button" id="edit" class="btn btn-warning" onclick="edit()">编辑</button>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="system:operator:del">
-                        <button type="button" id="del" class="btn btn-danger" onclick="del()">删除</button>
+                        <button type="button" id="del" class="btn btn-danger" onclick="deleteAll()">删除</button>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="system:operator:view">
                         <button type="button" id="view" class="btn btn-info" onclick="view()">查看</button>
                     </shiro:hasPermission>
 
-                    <a href="#" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
+                    <a href="#" id="search-btn" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
                 </div>
                 <%--信息列表表格--%>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">

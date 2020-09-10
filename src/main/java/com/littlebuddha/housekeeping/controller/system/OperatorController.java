@@ -109,9 +109,4 @@ public class OperatorController {
         ajaxResult.setMessage("删除操作用户信息成功");
         return ajaxResult;
     }
-
-    public AjaxResult dataExport(Operator operator){
-
-        return null;
-    }
 }
