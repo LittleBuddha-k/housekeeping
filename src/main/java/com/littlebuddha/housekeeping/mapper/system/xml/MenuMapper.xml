@@ -45,9 +45,6 @@
             <if test="operator != null and operator != '' and operator.id != null and operator.id != ''">
                 and c.operator_id=#{operator.id}
             </if>
-            <if test="parentId != null and parentId != ''">
-                and a.parent_id = #{parentId}
-            </if>
         </where>
         <!-- 用分组去重多重身份的重复菜单 -->
         GROUP BY a.name
@@ -58,6 +55,7 @@
         <include refid="menuColumns"/>
         FROM system_menu a
         <where>
+            a.is_delete = #{DEL_FLAG_NORMAL}
             <!-- 判断条件参数是否为空 -->
             <if test="name != null and name != ''">
                 and a.name = #{name}
@@ -82,6 +80,9 @@
         SELECT
         <include refid="menuColumns"/>
         FROM system_menu a
+        <where>
+            a.is_delete = #{DEL_FLAG_NORMAL}
+        </where>
         <choose>
             <when test="page !=null and page.orderBy != null and page.orderBy != ''">
                 ORDER BY ${page.orderBy}
@@ -92,33 +93,11 @@
         </choose>
     </select>
 
-    <select id="findChildrenList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
+    <select id="findTheBiggestMenu" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
         SELECT
         <include refid="menuColumns"/>
         FROM system_menu a
-        <where>
-            <!-- 判断条件参数是否为空 -->
-            <if test="parentId != null and parentId != ''">
-                and a.parent_id = #{id}
-            </if>
-        </where>
-        ORDER BY sort
-    </select>
-
-    <select id="findParentList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
-        SELECT
-        <include refid="menuColumns"/>
-        FROM system_menu a
-        <where>
-            <!-- 判断条件参数是否为空 -->
-            <if test="name != null and name != ''">
-                and a.name = #{name}
-            </if>
-            <if test="parentId != null and parentId != ''">
-                and a.parent_id = #{parentId}
-            </if>
-        </where>
-        ORDER BY sort
+        WHERE a.is_delete = #{DEL_FLAG_NORMAL} and a.parent_id = '0'
     </select>
 
     <insert id="insert">

@@ -46,15 +46,6 @@ To change this template use File | Settings | File Templates.
                     <shiro:hasPermission name="system:operator:add">
                         <button type="button" id="add" class="btn btn-info" onclick="add()">新建</button>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="system:operator:edit">
-                        <button type="button" id="edit" class="btn btn-warning" onclick="edit()">编辑</button>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="system:operator:del">
-                        <button type="button" id="del" class="btn btn-danger" onclick="deleteAll()">删除</button>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="system:operator:view">
-                        <button type="button" id="view" class="btn btn-info" onclick="view()">查看</button>
-                    </shiro:hasPermission>
 
                     <a href="#" id="search-btn" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
                 </div>

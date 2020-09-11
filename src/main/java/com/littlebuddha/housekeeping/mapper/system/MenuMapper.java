@@ -13,7 +13,5 @@ public interface MenuMapper extends BaseMapper<Menu> {
 
     List<Menu> findMenuByOperator(Menu menu);
 
-    List<Menu> findChildrenList(Menu menu);
-
-    List<Menu> findParentList(Menu menu);
+    Menu findTheBiggestMenu(Menu menu);
 }

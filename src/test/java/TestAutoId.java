@@ -1,4 +1,6 @@
 import com.littlebuddha.housekeeping.common.other.AutoId;
+import com.littlebuddha.housekeeping.entity.system.Menu;
+import org.junit.Test;
 
 /**
  * @author ck
@@ -10,5 +12,11 @@ public class TestAutoId {
             String autoId = AutoId.getAutoId();
             System.out.println(autoId);
         }
+    }
+
+    @Test
+    public void ft(){
+        Menu menu = new Menu();
+        System.out.println(Menu.DEL_FLAG_NORMAL);
     }
 }

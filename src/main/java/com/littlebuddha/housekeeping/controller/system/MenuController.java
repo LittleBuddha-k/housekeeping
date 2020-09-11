@@ -43,7 +43,8 @@ public class MenuController {
     public String list(HttpServletRequest request, HttpServletResponse response,Menu menu, Model model) {
         List<Menu> afterSort = new ArrayList<>();//排序后的list
         List<Menu> allList = menuService.findAllList(menu);
-        List<Menu> sortList = TreeDataUtil.sortList(allList, afterSort, "1");//排序
+        Menu theBiggestMenu = menuService.findTheBiggestMenu(menu);
+        List<Menu> sortList = TreeDataUtil.sortList(allList, afterSort, theBiggestMenu.getId());//排序
         List<Menu> afterSetChildrenList = TreeDataUtil.setChildrenList(sortList);//为有子节点的menu设置childrenList
         //List<Menu> list = menuService.findList(menu);
         model.addAttribute("list", afterSetChildrenList);
@@ -56,7 +57,8 @@ public class MenuController {
     public Page<Menu> data(HttpServletRequest request, HttpServletResponse response,Menu menu, Model model) {
         List<Menu> afterSort = new ArrayList<>();//排序后的list
         Page<Menu> menuPage = menuService.findPage(new Page<>(request, response), menu);
-        List<Menu> sortList = TreeDataUtil.sortList(menuPage.getData(), afterSort, "1");//排序
+        Menu theBiggestMenu = menuService.findTheBiggestMenu(menu);
+        List<Menu> sortList = TreeDataUtil.sortList(menuPage.getData(), afterSort, theBiggestMenu.getId());//排序
         List<Menu> afterSetChildrenList = TreeDataUtil.setChildrenList(sortList);//为有子节点的menu设置childrenList
         menuPage.setData(afterSetChildrenList);
         return menuPage;
@@ -103,6 +105,6 @@ public class MenuController {
     public List<Menu> findTest(Menu menu){
         Operator currentUser = UserUtils.getPrincipal();
         menu.setOperator(currentUser);
-        return menuService.findMenuByOperator(menu);
+        return menuService.findList(menu);
     }
 }

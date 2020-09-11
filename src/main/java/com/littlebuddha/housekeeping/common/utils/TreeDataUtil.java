@@ -56,7 +56,7 @@ public class TreeDataUtil {
         Menu root = null;
         //便利列表
         for (Menu menu : menuList) {
-            if("null".equals(menu.getParentId())){
+            if("0".equals(menu.getParentId())){
                 root = menu;
             }
             for (Menu menu1 : menuList) {

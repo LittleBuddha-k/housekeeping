@@ -34,8 +34,7 @@ public class IndexController {
         //查询当前用户一级菜单列表
         Menu menu = new Menu();
         menu.setOperator(currentUser);
-        List<Menu> menus = menuService.findMenuByOperator(menu);
-        session.setAttribute("menus",menus);
+        List<Menu> menuByOperator = menuService.findMenuByOperator(menu);
         return "system/index";
     }
 }

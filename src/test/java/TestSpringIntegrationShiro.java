@@ -1,3 +1,4 @@
+import com.littlebuddha.housekeeping.entity.system.Menu;
 import com.littlebuddha.housekeeping.entity.system.Operator;
 import com.littlebuddha.housekeeping.mapper.system.MenuMapper;
 import com.littlebuddha.housekeeping.mapper.system.RoleMapper;
@@ -50,5 +51,13 @@ public class TestSpringIntegrationShiro {
         operator.setId("1");
         Set<String> roles = roleMapper.findRolesByOperator(operator);
         System.out.println(roles);
+    }
+
+    @Test
+    public void TestMenuMapper(){
+        Menu theBiggestMenu = menuMapper.findTheBiggestMenu(new Menu());
+        Menu as = menuMapper.get("db4f501318434788ac98026d0a908ceb");
+        System.out.println("theBiggestMenu:"+theBiggestMenu);
+        System.out.println("get:"+as);
     }
 }
