@@ -97,9 +97,9 @@
         <div class="nav toggle">
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
         </div>
-        <c:forEach items="${sessionScope.menus}" var="menu">
-            <div class="navigation-bar-menu">
-                <a href="javascript:;" onclick="getMenu(${menu.id})" id="${menu.id}">${menu.name}</a>
+        <c:forEach items="${levelOneMenus}" var="levelOneMenu">
+            <div class="nav toggle">
+                <a id="">${levelOneMenu.name}</a>
             </div>
         </c:forEach>
         <nav class="nav navbar-nav">
@@ -108,7 +108,7 @@
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                        id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                         <img src="${sessionScope.currentUser.picture}" alt="">
-                        <shiro:principal property="name" />
+                        <shiro:principal property="name"/>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="javascript:;">个人资料</a>

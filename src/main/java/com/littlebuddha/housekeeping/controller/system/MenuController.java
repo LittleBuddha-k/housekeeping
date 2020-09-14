@@ -68,7 +68,7 @@ public class MenuController {
     public String form(@PathVariable(name = "mode") String mode, Menu menu, Model model) {
         model.addAttribute("menu", menu);
         model.addAttribute("mode", mode);
-        return "systemsettings/menuForm";
+        return "system/menuForm";
     }
 
     @ResponseBody

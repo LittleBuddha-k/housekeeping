@@ -42,6 +42,18 @@ public class MenuService extends BaseService<Menu, MenuMapper> {
         return theBiggestMenu;
     };
 
+    public List<Menu> findLevelOneMenus(Menu menu){
+        List<Menu> operatorsMenus = findMenuByOperator(menu);
+        Menu parentMenus = findTheBiggestMenu(menu);
+        List<Menu> levelOneMenus = new ArrayList<>();
+        for (Menu operatorsMenu : operatorsMenus) {
+            if (parentMenus != null && StringUtils.isNotBlank(parentMenus.getId()) && parentMenus.getId().equals(operatorsMenu.getParentId())){
+                levelOneMenus.add(operatorsMenu);
+            }
+        }
+        return levelOneMenus;
+    }
+
     @Transactional
     public int save(Menu menu) {
         int row = super.save(menu);
