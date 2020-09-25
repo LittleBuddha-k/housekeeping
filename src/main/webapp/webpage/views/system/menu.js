@@ -67,7 +67,7 @@
     };
 
     function add() {
-        hk.open("${ctx}/system/menu/form/add","菜单新增");
+        hk.open("${ctx}/system/menu/form/add","菜单新增","height=500px,width=600px");
     };
 
     function edit() {

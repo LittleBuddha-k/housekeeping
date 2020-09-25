@@ -33,6 +33,7 @@
         SELECT DISTINCT a.permission FROM system_menu a,system_role_menu b,system_operator_role c
         WHERE a.id=b.menu_id AND b.role_id=c.role_id
         AND c.operator_id=#{id}
+        ORDER BY a.create_date DESC
     </select>
 
     <select id="findMenuByOperator" resultType="com.littlebuddha.housekeeping.entity.system.Menu">
@@ -48,6 +49,7 @@
         </where>
         <!-- 用分组去重多重身份的重复菜单 -->
         GROUP BY a.name
+        ORDER BY a.create_date DESC
     </select>
 
     <select id="findList" resultType="com.littlebuddha.housekeeping.entity.system.Menu">

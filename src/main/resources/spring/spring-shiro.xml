@@ -87,7 +87,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!--LoginUrl认证提交地址，如果认证没有通过将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单验证-->
-        <property name="loginUrl" value="/login"></property>
+        <property name="loginUrl" value="/loginPage"></property>
         <!--指定没有权限操作时的跳转页面-->
         <property name="unauthorizedUrl" value="/unAuthorized"></property>
         <!--指定认证成功后的跳转页面-->
@@ -108,7 +108,7 @@
                 /loginPage = anon
                 /logOut = logout
                 <!--authc需要认证-->
-                /** = authc
+                <!--/** = authc-->
             </value>
         </property>
     </bean>

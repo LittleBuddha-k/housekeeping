@@ -23,7 +23,7 @@ public class Menu extends DataEntity<Menu> {
 
     private Operator operator;//外键  用于查询菜单列表的所属人的id
 
-    private Integer hasChildren;//是否存在子节点  0:无  1：有
+    private Integer hasChildren=0;//是否存在子节点  0:无  1：有。 默认没得
 
     private List<Menu> childrenMenus;//
 

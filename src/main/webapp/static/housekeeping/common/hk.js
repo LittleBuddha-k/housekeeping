@@ -15,8 +15,8 @@
          * @param url
          * @param title
          */
-        open:function (url,title) {
-            window.open(url,title,'height=60%, width=70%, top=10%,left=20%, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+        open:function (url,title,size) {
+            window.open(url,title,size);
         },
         info:function(message){
             alert(message);

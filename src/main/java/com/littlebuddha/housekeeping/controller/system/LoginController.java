@@ -37,29 +37,20 @@ public class LoginController {
     @RequestMapping("/login")
     public String login(@RequestParam(name = "username", required = true) String username,
                         @RequestParam(name = "password", required = true) String password,
-                        HttpServletRequest request) {
+                        HttpServletRequest request,
+                        Model model) {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         Subject currentUser = SecurityUtils.getSubject();
-        if(!currentUser.isAuthenticated()){
+        try {
             currentUser.login(usernamePasswordToken);
+            return "redirect:/index";
+        } catch (UnknownAccountException uae) {
+            model.addAttribute("message", "账户错误");
+            return "redirect:/loginPage";
+        } catch (IncorrectCredentialsException ice) {
+            model.addAttribute("message", "密码错误");
+            return "redirect:/loginPage";
         }
-        //如果登陆失败，从request、中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
-        String shiroLoginFailure = (String) request.getAttribute("shiroLoginFailure");
-
-        if (shiroLoginFailure != null) {
-            if (UnknownAccountException.class.getName().equals(shiroLoginFailure)) {
-
-                //最终会抛给异常处理器
-                throw new RuntimeException("未知账户不存在");
-            } else if (IncorrectCredentialsException.class.getName().equals(shiroLoginFailure)) {
-                throw new RuntimeException("用户名/密码错误");
-            } else {
-                throw new RuntimeException();//生成最终异常未知
-            }
-        }
-        //该方法不处理登陆成功(认证成功),shiro认证成功后会自动跳转到上一个路径
-        //登录失败过后还是返回到登陆页面
-        return "system/login";
     }
 
     @RequestMapping("/logOut")

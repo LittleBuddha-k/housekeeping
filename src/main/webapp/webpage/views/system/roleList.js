@@ -141,6 +141,10 @@ function add() {
     hk.open("${ctx}/system/role/form/add","角色新增");
 };
 
+function permission() {
+    hk.open("${ctx}/system/role/list","权限设置");
+};
+
 function edit() {
     var id = hk.getSelectId();
     if(id.length > 1){

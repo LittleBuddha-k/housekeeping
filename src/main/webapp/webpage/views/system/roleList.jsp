@@ -54,6 +54,9 @@ To change this template use File | Settings | File Templates.
                         <button type="button" id="view" class="btn btn-info" onclick="view()">查看</button>
                     </shiro:hasPermission>
 
+                        <button type="button" id="permission" class="btn btn-warning" onclick="permission()">权限设置</button>
+
+
                     <a href="#" id="search-btn" style="margin-left: 70%"><i class="glyphicon glyphicon-search"></i>搜索</a>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">

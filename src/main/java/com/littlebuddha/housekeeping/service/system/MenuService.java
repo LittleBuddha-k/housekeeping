@@ -56,6 +56,10 @@ public class MenuService extends BaseService<Menu, MenuMapper> {
 
     @Transactional
     public int save(Menu menu) {
+        if(menu.getParentId() == null || StringUtils.isBlank(menu.getParentId())){
+            Menu theBiggestMenu = findTheBiggestMenu(menu);
+            menu.setParentId(theBiggestMenu.getId());
+        }
         int row = super.save(menu);
         return row;
     }

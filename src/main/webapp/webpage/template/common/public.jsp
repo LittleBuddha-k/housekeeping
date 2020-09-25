@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%@include file="/webpage/template/common/public.js" %>
 </head>
 <body>
 
@@ -91,14 +92,14 @@
     </div>
 </div>
 
-<!-- 顶层显示邮件栏 -->
+<!-- 顶层显示导航栏 -->
 <div class="top_nav">
     <div class="nav_menu">
         <div class="nav toggle">
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
         </div>
         <c:forEach items="${levelOneMenus}" var="levelOneMenu">
-            <div class="nav toggle">
+            <div class="nav toggle levelOneMenu" style="width: auto">
                 <a id="">${levelOneMenu.name}</a>
             </div>
         </c:forEach>

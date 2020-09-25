@@ -22,29 +22,29 @@ To change this template use File | Settings | File Templates.
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                 <form:form id="form" modelAttribute="menu" action="${ctx}/system/menu/save" method="post"
                            class="form-label-left input_mask">
-                    <form:hidden path="id"/>
+                    <form:hidden path="parentId"/>
                     <div class="col-md-4 col-sm-4  form-group has-feedback">
                         <form:input type="text" id="name" name="name" path="name" required="required"
                                class="form-control has-feedback-left" placeholder="菜单名称"/>
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-4 col-sm-4  form-group has-feedback">
-                        <form:input type="text" id="href" name="href" path="href" required="required"
+                        <form:input type="text" id="href" name="href" path="href"
                                     class="form-control has-feedback-left" placeholder="菜单链接"/>
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-4 col-sm-4  form-group has-feedback">
-                        <form:input type="text" id="isShow" name="isShow" path="isShow" required="required"
+                        <form:input type="text" id="isShow" name="isShow" path="isShow"
                                     class="form-control has-feedback-left" placeholder="隐藏/显示"/>
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-4 col-sm-4  form-group has-feedback">
-                        <form:input type="text" id="menuTypE" name="menuTypE" path="menuType" required="required"
+                        <form:input type="text" id="menuTypE" name="menuTypE" path="menuType"
                                     class="form-control has-feedback-left" placeholder="类型"/>
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-4 col-sm-4  form-group has-feedback">
-                        <form:input type="text" id="permission" name="permission" path="permission" required="required"
+                        <form:input type="text" id="permission" name="permission" path="permission" 
                                     class="form-control has-feedback-left" placeholder="菜单权限"/>
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     </div>

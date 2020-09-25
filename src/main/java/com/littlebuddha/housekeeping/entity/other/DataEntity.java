@@ -24,7 +24,7 @@ public abstract class DataEntity<E> extends BaseEntity<E> implements Serializabl
     private Operator updateBy;
     private Date updateDate;
 
-    private Integer isDelete;//是否删除 0-未删除 1-已删除
+    private Integer isDelete=0;//是否删除 0-未删除 1-已删除,默认未删除
 
     private String remarks;
 
