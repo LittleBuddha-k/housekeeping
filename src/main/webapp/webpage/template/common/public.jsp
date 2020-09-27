@@ -38,17 +38,7 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-sitemap"></i>系统设置<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="${ctx}/system/menu/list">菜单管理</span></a>
-                                <%--<ul class="nav child_menu">
-                                    <li class="sub_menu"><a href="${ctx}/system/province/list">省级管理</a>
-                                    </li>
-                                    <li><a href="${ctx}/system/city/list">市级管理</a>
-                                    </li>
-                                    <li><a href="${ctx}/system/area/list">区级管理</a>
-                                    </li>
-                                    <li><a href="${ctx}/system/street/list">街级管理</a>
-                                    </li>
-                                </ul>--%>
+                            <li><a href="${ctx}/system/menu/list">菜单管理</a>
                             </li>
                             <li><a>地域管理<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
@@ -65,6 +55,18 @@
                             <li><a href="${ctx}/system/operator/list">用户管理</a>
                             </li>
                             <li><a href="${ctx}/system/role/list">角色管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-sitemap"></i>流程管理<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="${ctx}/system/act/list">流程列表</a>
+                            </li>
+                            <li><a href="${ctx}/system/act/historyList">历史流程</a>
+                            </li>
+                            <li><a href="${ctx}/system/act/actTestForm">创建流程</a>
                             </li>
                         </ul>
                     </li>
@@ -197,7 +199,7 @@
     </div>
 </div>
 <!-- /顶层显示邮件栏 -->
-
-
+<%--引入js--%>
+<%@include file="/webpage/template/common/commonjs.jsp"%>
 </body>
 </html>
